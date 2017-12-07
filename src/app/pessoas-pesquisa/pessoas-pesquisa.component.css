@@ -1,0 +1,17 @@
+.col-estado{
+  width: 120px;
+  text-align: right;
+}
+
+.col-status{
+  width: 120px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
