@@ -12,7 +12,6 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
@@ -39,7 +38,6 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent,
-    LancamentosGridComponent
   ],
   exports: [
     LancamentoCadastroComponent,
