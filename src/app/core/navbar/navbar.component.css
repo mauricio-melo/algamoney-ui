@@ -44,3 +44,7 @@
 .navbar-menuitem a:hover { /*mouse em cima*/
   color: #fff;
 }
+
+.navbar-menuitem.ativo {
+  background-color: #494541;
+}
