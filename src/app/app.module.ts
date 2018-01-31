@@ -1,3 +1,4 @@
+import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +16,8 @@ import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa
 const routes: Routes = [
   { path: 'lancamentos', component: LancamentosPesquisaComponent },
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
-  { path: 'pessoas', component: PessoasPesquisaComponent }
+  { path: 'pessoas', component: PessoasPesquisaComponent },
+  { path: 'pessoas/novo', component: PessoaCadastroComponent }
 ];
 
 @NgModule({
