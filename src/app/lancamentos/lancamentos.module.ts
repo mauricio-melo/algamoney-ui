@@ -12,10 +12,9 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 
+import { SharedModule } from './../shared/shared.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
-
-import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -30,14 +29,13 @@ import { SharedModule } from '../shared/shared.module';
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-
     CurrencyMaskModule,
 
     SharedModule
   ],
   declarations: [
     LancamentoCadastroComponent,
-    LancamentosPesquisaComponent,
+    LancamentosPesquisaComponent
   ],
   exports: [
     LancamentoCadastroComponent,
