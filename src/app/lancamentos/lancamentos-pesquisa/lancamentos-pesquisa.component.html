@@ -1,73 +1,75 @@
 <div class="container">
-  <form #f="ngForm" autocomplete="off">
+  <div class="ui-g">
 
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <h1>Novo Lançamento</h1>
-      </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
 
       <div class="ui-g-12">
-        <p-selectButton name="tipo" [options]="tipos" ngModel #tipo></p-selectButton>
-      </div>
-
-      <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label>Vencimento</label>
-        <p-calendar name="vencimento" dateFormat="dd/mm/yy"
-          [inline]="false" [readonlyInput]="false" [showIcon]="false"
-          ngModel #vencimento="ngModel" required></p-calendar>
-
-        <app-message [control]="vencimento" error="required"
-          text="Informe uma data de vencimento"></app-message>
-      </div>
-
-      <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
-      </div>
-
-      <div class="ui-g-12 ui-md-9 ui-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text" name="descricao"
-          ngModel #descricao="ngModel" required minlength="5">
-
-        <app-message [control]="descricao" error="required"
-          text="Informe a descrição"></app-message>
-        <app-message [control]="descricao" error="minlength"
-          text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
-      </div>
-
-      <div class="ui-g-12 ui-md-3 ui-fluid">
-        <label>Valor</label>
-        <input pInputText type="text" name="valor" placeholder="0,00"
-          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
-          ngModel required>
-      </div>
-
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label>Categoria</label>
-        <p-dropdown name="categoria" [options]="categorias"
-          placeholder="Selecione" [autoWidth]="false"
-          ngModel required></p-dropdown>
-      </div>
-
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label>Pessoa</label>
-        <p-dropdown name="pessoa" [options]="pessoas" placeholder="Selecione"
-          [autoWidth]="false" [filter]="true"
-          ngModel required></p-dropdown>
+        <h1>Lançamentos</h1>
       </div>
 
       <div class="ui-g-12 ui-fluid">
-        <label>Observação</label>
-        <textarea pInputTextarea rows="3"></textarea>
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao"
+          [(ngModel)]="filtro.descricao">
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-info"></button>
-        <a href="javascript:;">Voltar para a pesquisa</a>
+        <label style="display: block">Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
+
+        <label>até</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
       </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable [value]="lancamentos" [responsive]="true"
+          emptyMessage="Nenhum lançamento encontrado"
+          [paginator]="true" [rows]="filtro.itensPorPagina"
+          [lazy]="true" [totalRecords]="totalRegistros"
+          (onLazyLoad)="aoMudarPagina($event)"
+          #tabela>
+        <p-column field="pessoa" header="Pessoa"></p-column>
+        <p-column field="descricao" header="Descrição"></p-column>
+        <p-column header="Vencimento" styleClass="col-data">
+            <ng-template let-lanc="rowData" pTemplate="body">
+                <span>{{ lanc.dataVencimento | date:'dd/MM/yyyy' }}</span>
+            </ng-template>
+        </p-column>
+        <p-column header="Pagamento" styleClass="col-data">
+            <ng-template let-lanc="rowData" pTemplate="body">
+                <span>{{ lanc.dataPagamento | date:'dd/MM/yyyy' }}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="valor" header="Valor" styleClass="col-valor">
+          <ng-template let-lanc="rowData" pTemplate="body">
+            <span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lanc.valor | number:'1.2-2' }}</span>
+          </ng-template>
+        </p-column>
+        <p-column styleClass="col-acoes">
+            <ng-template let-lanc="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(lanc)"></button>
+            </ng-template>
+        </p-column>
+      </p-dataTable>
     </div>
 
-  </form>
+    <div class="ui-g-12">
+      <a pButton label="Novo Lançamento"></a>
+    </div>
+
+  </div>
+
 </div>
