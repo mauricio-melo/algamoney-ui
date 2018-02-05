@@ -7,4 +7,5 @@ app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
-app.listen(4200);
+// tento ler a variavel de ambiente port do heroku, caso nao tenha nada eu escolho a porta
+app.listen(process.env.PORT || 4200);
