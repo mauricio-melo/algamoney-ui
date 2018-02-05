@@ -1,5 +1,6 @@
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,17 +15,23 @@ import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
     RouterModule,
 
     ToastyModule.forRoot(),
     ConfirmDialogModule,
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [
+    NavbarComponent,
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
+  ],
   exports: [
     NavbarComponent,
     ToastyModule,
