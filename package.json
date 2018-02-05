@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "angular2-jwt": "^0.2.3",
     "core-js": "^2.4.1",
+    "enhanced-resolve": "^3.3.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.18.1",
     "ng2-currency-mask": "^4.1.0",
@@ -32,7 +33,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.1.2",
+    "@angular/cli": "1.2.6",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
